@@ -602,11 +602,12 @@ function prepare3DViewer(id) {
   v.camTarget.set(cx, cy, cz);
   v.camDist = half * 2.0;
 
-  if (cd.cam_fwd) {
-    const cf = cd.cam_fwd[0];
-    const cfd = [cf[0], -cf[1], -cf[2]];
-    // Orbit behind camera looking same direction as image, then 45° left
-    v.camYaw = Math.atan2(-cfd[0], -cfd[2]) + Math.PI * 0.25;
+  if (cd.cam_pos) {
+    // Place orbit camera at same position as the real camera (in viewer coords)
+    // so we see the scene the same way as the image, then offset 45° left
+    const cp = cd.cam_pos[0];
+    const cpv = [cp[0], -cp[1], -cp[2]]; // viewer coords
+    v.camYaw = Math.atan2(cpv[0] - cx, cpv[2] - cz) + Math.PI * 0.25;
     v.camPitch = 0.4;
   } else {
     v.camYaw = Math.PI * 0.25;
