@@ -603,10 +603,10 @@ function prepare3DViewer(id) {
   v.camDist = half * 2.0;
 
   if (cd.cam_fwd) {
-    const cf = cd.cam_fwd[0];
-    const cfd = [cf[0], -cf[1], -cf[2]];
-    v.camYaw = Math.atan2(cfd[0], cfd[2]) + Math.PI * 0.75;
-    v.camPitch = 0.4;
+    // cam0 = identity (origin, looking +Z). In viewer coords that's (0,0,-1).
+    // yaw=0, pitch=0 puts orbit camera at +Z looking -Z = exactly camera view.
+    v.camYaw = 0;
+    v.camPitch = 0;
   } else {
     v.camYaw = Math.PI * 0.25;
     v.camPitch = 0.3;
