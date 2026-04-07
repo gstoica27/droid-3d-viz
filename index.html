@@ -605,8 +605,8 @@ function prepare3DViewer(id) {
   if (cd.cam_fwd) {
     const cf = cd.cam_fwd[0];
     const cfd = [cf[0], -cf[1], -cf[2]];
-    // View from same direction as camera, offset 45° to the left
-    v.camYaw = Math.atan2(cfd[0], cfd[2]) + Math.PI + Math.PI * 0.25;
+    // View looking same direction as camera (behind camera), 45° left offset
+    v.camYaw = Math.atan2(cfd[0], cfd[2]) + Math.PI * 0.25;
     v.camPitch = 0.3;
   } else {
     v.camYaw = Math.PI * 0.25;
