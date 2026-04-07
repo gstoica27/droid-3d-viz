@@ -603,13 +603,10 @@ function prepare3DViewer(id) {
   v.camDist = half * 2.0;
 
   if (cd.cam_fwd) {
-    // cam_fwd in viewer coords: (fwd[0], -fwd[1], -fwd[2])
-    // Orbit camera goes BEHIND the forward direction to look same way as camera
     const cf = cd.cam_fwd[0];
-    const fx = cf[0], fy = -cf[1], fz = -cf[2];
-    const len = Math.sqrt(fx*fx + fy*fy + fz*fz);
-    v.camYaw = Math.atan2(-fx, -fz) + Math.PI * 0.25;
-    v.camPitch = Math.asin(Math.max(-0.8, Math.min(0.8, -fy / len)));
+    const cfd = [cf[0], -cf[1], -cf[2]];
+    v.camYaw = Math.atan2(cfd[0], cfd[2]) + Math.PI * 0.75;
+    v.camPitch = 0.4;
   } else {
     v.camYaw = Math.PI * 0.25;
     v.camPitch = 0.3;
